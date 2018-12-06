@@ -7,6 +7,8 @@ public class Main {
 		// TODO Auto-generated method stub
 		Cycle cycle = new Cycle(array);
 		ReturnClass answer = cycle.findStepsAndLength();
+		System.out.println("Steps = " + answer.Steps);
+		System.out.println("Cycle length = " + answer.Cycle_length);
 	}
 
 }

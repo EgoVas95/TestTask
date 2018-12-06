@@ -6,8 +6,9 @@ import java.util.List;
 
 public class Cycle {
 
-	byte[] Array;
-	static List<byte[]> ObtainedCycles = new ArrayList<byte[]>();
+	//Данные переменные были объявлены, как публичные, в следствие чего нарушалась инкапсуляция
+	private byte[] Array;
+	private static List<byte[]> ObtainedCycles = new ArrayList<byte[]>();
 		
 	private int findTheIndexOfTheMaximum(byte[] buffer) {
 		int answ = 0;
@@ -42,17 +43,31 @@ public class Cycle {
 		}
 		return ret;
 	}
+	
+	private boolean equals(byte[] array1, byte[] array2)
+	{
+		for(int i = 0; i < array1.length; i++)
+		{
+			if(array1 == null || array2 == null) {return false;}
+			if(array1[i] != array2[i]) {return false;}			
+		}
+		return true;
+	}
 
 	private int findIdenticalArray(List<byte[]> list, byte[] buf) {
-		int steps = 0;
+		
 		for(int i = 0; i < list.size(); i++) {
-			steps++;
-			if(Arrays.equals(list.get(i), buf)) {
-				System.out.println("Find " + steps);
-				return steps;
+			if(equals(list.get(i), buf)) {
+				return i + 1;
 			}
 		}
 		return 0;
+		// Метод Arrays.equals проверяет условие равности cсылок на элементы (в нашем случае 
+		// заранее известно, что массивы находятся в разных областях памяти), 
+		// длины массивов (заранее известно, что они равны) и только затем поэлементно сравниваются 
+		// массивы. Убрав ненужные действия, можно сократить время сравнения 
+		// Сложность поиска обусловленна тем, что для поиска совпадений каждый массив сравнивается 
+		// поэлементно, что занимает длительное время, увеличивающееся с увеличением количества шагов. 
 	}
 	
 	public ReturnClass findStepsAndLength() {
